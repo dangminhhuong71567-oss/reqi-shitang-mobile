@@ -55,13 +55,23 @@ const FoodExperience = (() => {
     'corn-rib-soup': {mood:'amber',parts:['corn','rib','greens','corn:extra','rib:extra']},
     'mushroom-chicken-soup': {mood:'sage',parts:['mushroom','chicken','greens','mushroom:extra','chicken:extra'],lid:'claypot-lid'}
   };
+  const ingredientImages = {
+    beef:'./food/ingredient-beef.webp', shrimp:'./food/ingredient-shrimp.webp', garlic:'./food/ingredient-garlic.webp',
+    chicken:'./food/ingredient-chicken.webp', pork:'./food/ingredient-pork.webp', tofu:'./food/ingredient-tofu.webp',
+    greens:'./food/ingredient-greens.webp', egg:'./food/ingredient-egg.webp', rice:'./food/ingredient-rice.webp',
+    noodles:'./food/ingredient-noodles.webp', dumpling:'./food/ingredient-dumpling.webp', cheese:'./food/ingredient-cheese.webp',
+    chocolate:'./food/ingredient-chocolate.webp', caramel:'./food/ingredient-caramel.webp', mango:'./food/ingredient-mango.webp',
+    strawberry:'./food/ingredient-strawberry.webp', cream:'./food/ingredient-cream.webp', sugar:'./food/ingredient-sugar.webp',
+    scallion:'./food/ingredient-scallion.webp', mushroom:'./food/ingredient-mushroom.webp', corn:'./food/ingredient-corn.webp',
+    rib:'./food/ingredient-rib.webp', tea:'./food/ingredient-tea.webp', oil:'./food/ingredient-oil.webp'
+  };
   const positions = [
     [50,24,-11,116],[27,40,13,88],[74,42,-15,86],[34,53,-19,78],
     [69,56,12,78],[52,39,9,89],[23,24,-8,63]
   ];
   function piece(kind,channel,i){
     const [x,y,r,w]=positions[i%positions.length];
-    const visual=kind==='chili'?'<img src="./food/chili-cutout.webp" alt="">':kind==='ice'?'<img src="./food/ice-cutout.webp" alt="">':`<svg viewBox="0 0 120 80" role="presentation">${art[kind]||art.greens}</svg>`;
+    const visual=kind==='chili'?'<img src="./food/chili-cutout.webp" alt="">':kind==='ice'?'<img src="./food/ice-cutout.webp" alt="">':ingredientImages[kind]?`<img src="${ingredientImages[kind]}" alt="">`:`<svg viewBox="0 0 120 80" role="presentation">${art[kind]||art.greens}</svg>`;
     const semantic=channel==='extra'||channel==='cold'?channel:channel?kind:'base';
     return `<div class="scene-piece" data-channel="${semantic}" data-index="${i}" style="--piece-x:${x}%;--piece-y:${y}%;--piece-r:${r}deg;--piece-w:${w}px;--stagger:${i*65}ms" aria-hidden="true">${visual}</div>`;
   }
